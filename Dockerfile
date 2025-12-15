@@ -1,8 +1,7 @@
 FROM php:8.2-apache
 
-# Pastikan hanya satu MPM aktif
-RUN a2dismod mpm_event mpm_worker \
- && a2enmod mpm_prefork
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
+ && rm -f /etc/apache2/mods-enabled/mpm_worker.load
 
 COPY . /var/www/html/
 
